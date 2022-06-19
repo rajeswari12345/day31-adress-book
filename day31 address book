@@ -1,0 +1,75 @@
+CREATE DATABASE ADDRESS_BOOK_SERVICES;
+USE ADDRESS_BOOK_SERVICES;
+
+----------UC2-------
+--------CREATING TABLE-------
+CREATE TABLE ADDRESS_BOOK_SERVICE 
+(
+    FirstName varchar(255),
+    LastName varchar(255),
+    City char(25),
+    Address varchar(255),
+    StateName varchar(255),
+    Phone varchar(25),
+    Email varchar(25),
+    Zip int,
+);
+SELECT *FROM ADDRESS_BOOK_SERVICE 
+
+----------UC3--------
+--------INSERT CONTACT IN ADDRESSBOOK------
+INSERT INTO ADDRESS_BOOK_SERVICE VALUES('Balusupati','Raji','Guntur','Amaravathi','Andhra pradesh','9542651379','rajeswari123@gmail.com','522007');
+INSERT INTO ADDRESS_BOOK_SERVICE VALUES('Jammula','Manikanta','Guntur','Brodipet','Andhra pradesh','8801729522','mani123453@gmail.com','525007');
+INSERT INTO ADDRESS_BOOK_SERVICE VALUES('Narakulapati','Vaiishu','Guntur','Gunjanagudla','Andhra pradesh','8882651379','vaishu907gmail.com','562007');
+INSERT INTO ADDRESS_BOOK_SERVICE VALUES('Pothuri','Manasa','Guntur','Krosur','Andhra pradesh','8942651379','manasa789123@gmail.com','567007');
+SELECT *FROM ADDRESS_BOOK_SERVICE ;
+
+
+----------UC4--------
+--------EDITING DETAILS USING NAME------
+UPDATE ADDRESS_BOOK_SERVICE  SET  Phone = '9542651379' WHERE  FirstName = 'Balusupati';
+SELECT *FROM ADDRESS_BOOK_SERVICE;
+
+
+
+----------UC5--------
+--------DELETING A PERSON USING NAME------
+DELETE FROM  ADDRESS_BOOK_SERVICE WHERE FirstName ='Jammula';
+SELECT *FROM ADDRESS_BOOK_SERVICE;
+
+
+
+----------UC6--------
+--------RETRIEVING DATA BY CITY OR STATE------
+SELECT *FROM ADDRESS_BOOK_SERVICE WHERE City ='Guntur';
+SELECT *FROM ADDRESS_BOOK_SERVICE WHERE StateName = 'Andhra Pradesh';
+
+
+----------UC7--------
+--------SIZE OF ADDRESS BOOK BY CITY OR STATE------
+Select COUNT(City) as City_Count FROM ADDRESS_BOOK_SERVICE;
+select COUNT(StateName) as State_Count FROM ADDRESS_BOOK_SERVICE;
+
+----------UC8--------
+--------SORTING DATA ALPHABETICALLY BY PERSON NAME------
+SELECT *FROM ADDRESS_BOOK_SERVICE ORDER BY(FirstName);
+
+
+
+----------UC9--------
+--------ABILITY TO IDENTIFY EACH ADDRESS BOOK WITH NAME AND TYPE-----
+alter table ADDRESS_BOOK_SERVICE add addressbook_Name varchar(30),addressbook_tType varchar(30);
+UPDATE ADDRESS_BOOK_SERVICE set addressbook_Name = 'family addressbook',addressbook_Type = 'Family' where FirstName = 'Raji';
+UPDATE ADDRESS_BOOK_SERVICE set addressbook_Name = 'friends addressbook',addressbook_Type = 'Friends' where FirstName = 'Sanket';
+SELECT *FROM ADDRESS_BOOK_SERVICE;
+
+
+----------UC10--------
+--------ABILITY TO GET NUMBER OF CONTACT PERSONS  USING COUNT TYPE-----
+select  count(addressbook_Type) from ADDRESS_BOOK_SERVICE where  addressbook_Type  = 'Family';
+
+----------UC11--------
+--------ABILITY TO ADD PERSON TO BOTH FRIEND ANF FAMILY--------
+INSERT INTO ADDRESS_BOOK_SERVICE VALUES('sneha ','ganga','Guntur','Amaravathi','Andhra pradesh','6842651379','gangapothuri456@gmail.com','522007');
+INSERT INTO ADDRESS_BOOK_SERVICE VALUES('pothuri','nagalakshmi','Guntur','Brodipet','Andhra pradesh','7201729522','nagalakshmi345@gmail.com','525007');
+SELECT *FROM ADDRESS_BOOK_SERVICE;
